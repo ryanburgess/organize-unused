@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+'use strict';
+const fs = require('fs');
+const mv = require('mv');
+const raw = './raw';
+const unused = './unused';
+const edits = [];
+
+fs.readdir('./', (err, files) => {
+  // find each file in the directory
+  files.forEach(file => {
+    const fileType = file.split('.')[1];
+    const fileName = file.split('.')[0];
+    
+    // if JPG file capture filename in array
+    if (fileType === 'jpg' || fileType === 'jpeg') {
+      // push all JPG filenames to edits array
+      edits.push(fileName);
+    }
+  });
+
+  //call move to Unused function
+  movetoUnused();
+});
+
+function movetoUnused() {
+  console.log(edits)
+  fs.readdir('./raw', (err, rawFiles) => {
+    rawFiles.forEach(rawFile => {
+      // ignore raw file type
+      const rawFileName = rawFile.split('.')[0];
+
+      // if the filename isn't in the edits array move this file to unused
+      if (!edits.includes(rawFileName)){
+
+        // if unused directory doesn't exist create one
+        if (!fs.existsSync('raw/unused')){
+          fs.mkdirSync('raw/unused');
+        }
+
+        // move any unused RAW file to unused directory
+        mv(`raw/${rawFile}`, `raw/unused/${rawFile}`, function(err) {
+          if(err) {
+            console.log(err);
+          }
+        });
+      }
+    });
+  });
+
+  // success message
+  console.log('Unused RAW files have been moved');
+}

@@ -1,0 +1,36 @@
+{
+  "name": "organize-unused",
+  "version": "1.0.0",
+  "description": "A CLI tool to add on to organize-raw package. This tool looks through created JPEGs and identified RAW photo files that were not edited.",
+  "main": "bin/organize",
+  "dependencies": {
+    "mv": "^2.1.1"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "organize-unused": "./bin/organize"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanburgess/organize-unused.git"
+  },
+  "keywords": [
+    "organize",
+    "photos",
+    "video",
+    "raw",
+    "cr2",
+    "dslr",
+    "camera"
+  ],
+  "author": "Ryan Burgess",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanburgess/organize-unused/issues"
+  },
+  "homepage": "https://github.com/ryanburgess/organize-unused#readme"
+}
