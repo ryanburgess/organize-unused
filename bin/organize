@@ -10,7 +10,12 @@ fs.readdir('./', (err, files) => {
   // find each file in the directory
   files.forEach(file => {
     const fileType = file.split('.')[1];
-    const fileName = file.split('.')[0];
+    let fileName = file.split('.')[0];
+    
+    // if the file name contains -Edit let's remove that for now so we don't accidently remove the RAW file because if it has the -Edit it will ignore that file and delete the RAW file
+    if (fileName.includes('-Edit')) {
+      fileName = fileName.replace('-Edit', '');
+    }
     
     // if JPG file capture filename in array
     if (fileType === 'jpg' || fileType === 'jpeg' || fileType === 'JPG' || fileType === 'JPEG') {
